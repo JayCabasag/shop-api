@@ -5,10 +5,14 @@ import com.jaycabasag.mobileecommerce.product.ProductRepository;
 import com.jaycabasag.mobileecommerce.product.dto.ProductDataRequest;
 import com.jaycabasag.mobileecommerce.product.dto.ProductDataResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,5 +44,16 @@ public class ProductServices {
         productRepository.save(product);
         ProductDataResponse response = new ProductDataResponse("Added product successfully");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    public ResponseEntity<?> getAllProducts(Integer limit){
+        Pageable pageable = PageRequest.of(0, limit);
+        Page<Product> page = productRepository.findAll(pageable);
+        List<Product> allProducts = page.getContent();
+        return new ResponseEntity<>(allProducts, HttpStatus.OK);
+    }
+    public ResponseEntity<?> getShopProducts(Long id){
+        List<Product> productList = productRepository.findAllByShop(id);
+        return new ResponseEntity<>(productList, HttpStatus.OK);
     }
 }

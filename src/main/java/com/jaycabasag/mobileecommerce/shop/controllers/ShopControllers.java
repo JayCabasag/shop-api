@@ -20,10 +20,8 @@ public class ShopControllers {
     public ResponseEntity<?> addShop(@RequestBody ShopDataRequest request){
         return shopServices.addShop(request);
     }
-
     @GetMapping("/shop/{id}")
     public ResponseEntity<?> getShop(@PathVariable("id") Long id){
         return shopServices.getShop(id);
     }
-
 }
