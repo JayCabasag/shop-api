@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://dpg-cgshbvorddl5dqtkkcq0-a.singapore-postgres.render.com:5432/buy_gadgets
+    username: admin
+    password: yPKCwDEYcNFmQTyPYgDNJYLr8KZpvjjL
+  jpa:
+    hibernate:
+      ddl-auto: update
+      format_sql: true
+      properties:
+        hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+application:
+  security:
+    jwt:
+      secret-key: 6251655468576D5A7134743777217A25432A46294A404E635266556A586E3272
+      expiration: 60000
+      refresh-token:
+        expiration: 604800000
+server:
+  error:
+    include-message: always
